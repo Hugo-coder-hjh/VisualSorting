@@ -174,3 +174,70 @@ function swap(arr, xp, yp) {
   arr[yp] = temp;
 
 }
+
+export function getHeapSortAnimations(stateArray) {
+  const animations = [];
+  if (stateArray.length <= 1) return stateArray;
+  // make a copy of the original array
+  const array = stateArray.slice(0);
+  // call helper function to build a max heap
+  buildMaxHeap(array, animations);
+  let end = array.length - 1;
+  while(end > 0) {
+    // as a max heap, array[0] now holds the max element in the array
+    // swap it to the end of the array
+    animations.push([0, end, true]);
+    let temp = array[end];
+    array[end] = array[0];
+    array[0] = temp;
+    animations.push([0, array[0], end, array[end]]);
+    animations.push([0, end, false]);
+    animations.push([end]);
+    // sift down current array[0] to make sure it is still a max heap
+    siftDown(array, 0, end, animations);
+    // elements on the left end has finished sorting
+    end--;
+  }
+  animations.push([end]);
+  return animations;
+}
+
+// helper functions
+function buildMaxHeap(array, animations) {
+  // we just need to compare half of the nodes because other half will be leaf nodes
+  let currentIndex = Math.floor(array.length / 2);
+  while (currentIndex >= 0) {
+    siftDown(array, currentIndex, array.length, animations);
+    currentIndex--;
+  }
+}
+
+function siftDown(array, start, end, animations) {
+  if (start >= Math.floor(end / 2)) {
+    return;
+  }
+  let left = start * 2 + 1;
+  let right = start * 2 + 2 < end ? start * 2 + 2 : null;
+  // find the larger child
+  let swap;
+  if (right) {
+    animations.push([start, left, right, true]);
+    animations.push([start, left, right, false]);
+    swap = (array[left] > array[right]) ? left : right;
+  } else{
+    swap = left;
+    animations.push([start, left, true, true]);
+    animations.push([start, left, false, true]);
+  }
+  if(array[start] < array[swap]) {
+    // child larger than parent, need to sift down parent
+    // animations.push([start, swap, true]);
+    let temp = array[swap];
+    array[swap] = array[start];
+    array[start] = temp;
+    animations.push([start, array[start], swap, array[swap]]);
+    animations.push([start, swap, false]);
+    // check next layer of the heap
+    siftDown(array, swap, end, animations);
+  }
+}
