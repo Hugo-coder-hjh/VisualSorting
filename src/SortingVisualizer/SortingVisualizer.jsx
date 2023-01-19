@@ -57,7 +57,7 @@ export default function SortingVisualizer() {
   const resetArray = () => {
     const newArray = [];
     for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
-      newArray.push(randomIntFromInterval(5, 730));
+      newArray.push(randomIntFromInterval(5,500));
     }
     console.log("before", newArray);
     setArray(newArray);
