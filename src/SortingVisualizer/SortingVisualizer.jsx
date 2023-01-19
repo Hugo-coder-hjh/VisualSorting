@@ -3,7 +3,7 @@ import { getMergeSortAnimations, getQuickSortAnimations, getBubblesortAnimations
 import './SortingVisualizer.css';
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 200;
+// const ANIMATION_SPEED_MS = 200;
 
 // Change this value for the number of bars (value) in the array.
 // const NUMBER_OF_ARRAY_BARS = 10;
@@ -33,6 +33,16 @@ export default function SortingVisualizer() {
   const handleClick = () => {
     // 👇 "message" stores input field value
     setNUMBER_OF_ARRAY_BARS(message);
+  };
+
+  const [bufferSpeed, setBufferSpeed] = useState('');
+  const [ANIMATION_SPEED_MS, setANIMATION_SPEED_MS] = useState('200');
+  const handleBuffer = (event) => {
+    setBufferSpeed(event.target.value);
+  };
+  const handleSpeed = () => {
+    // 👇 "message" stores input field value
+    setANIMATION_SPEED_MS(bufferSpeed);
   };
 
   // Change this value for the number of bars (value) in the array.
@@ -231,7 +241,7 @@ export default function SortingVisualizer() {
 
 
   return (
-    <>
+    <div>
     <div className="button-container">
       <button className="button" onClick={() => resetArray()}>Generate New Array</button>
       <button className="button" onClick={() => mergeSort()}>Merge Sort</button>
@@ -251,7 +261,20 @@ export default function SortingVisualizer() {
         value={message}
       />
       <h3>UpdatedArraySize: {NUMBER_OF_ARRAY_BARS}</h3>
-      <button onClick={handleClick}>Update</button>
+      <button onClick={handleClick}>Update Array Size</button>
+    </div>
+
+    <div className="speed-change">
+      <h2>Change the time out of your algorithm:</h2>
+      <input
+        type="text"
+        id="speed"
+        name="speed"
+        onChange={handleBuffer}
+        value={bufferSpeed}
+      />
+      <h3>UpdatedPlaySpeed: {ANIMATION_SPEED_MS}</h3>
+      <button onClick={handleSpeed}>Update Speed</button>
     </div>
     <div className="array-container">
       {array.map((value, idx) => (
@@ -265,7 +288,9 @@ export default function SortingVisualizer() {
           }}></div>
       ))}
     </div>
-  </>  
+    
+  </div>  
+
   );
 }
 
