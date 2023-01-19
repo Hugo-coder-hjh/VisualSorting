@@ -1,9 +1,10 @@
 import React from 'react';
+import { useRef } from 'react';
 import { getMergeSortAnimations, getQuickSortAnimations, getBubblesortAnimations } from '../sortingAlgorithms/sortingAlgorithms.js';
 import './SortingVisualizer.css';
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 200;
+const ANIMATION_SPEED_MS = 100;
 
 // Change this value for the number of bars (value) in the array.
 const NUMBER_OF_ARRAY_BARS = 10;
@@ -14,27 +15,53 @@ const PRIMARY_COLOR = 'turquoise';
 // This is the color of array bars that are being compared throughout the animations.
 const SECONDARY_COLOR = 'red';
 
-// This is the color of pivot in quick sort.
+// This is the color of pivot in quick sort.s
 const PIVOT_COLOR = 'blue';
 
 export default class SortingVisualizer extends React.Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
       array: [],
+      value: '5',
     };
+    // this.handleSize = this.handleSize.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  
+  handleSize(event) {
+    this.setState({value: event.target.value});
+    
+  }
+
+  handleSubmit(event) {
+    console.log("after", this.state.value);
+    alert('The number of array-bars were changed into: ' + this.state.value);
+    const array = [];
+    for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
+      // height is from 5 to 200
+      array.push(randomIntFromInterval(5, 200));
+    }
+    console.log(array);
+    this.setState({ array });
+   // event.preventDefault();
   }
 
   componentDidMount() {
     this.resetArray();
   }
 
+
   resetArray() {
     const array = [];
+    console.log("reset", this.state.value);
     for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
-      array.push(randomIntFromInterval(5, 730));
+      // height is from 5 to 200
+      array.push(randomIntFromInterval(5, 200));
     }
+    console.log(array);
     this.setState({ array });
   }
 
@@ -136,42 +163,60 @@ export default class SortingVisualizer extends React.Component {
 
   }
 
+
   // NOTE: This method will only work if your sorting algorithms actually return
   // the sorted arrays; if they return the animations (as they currently do), then
   // this method will be broken.
-  testSortingAlgorithms() {
-    for (let i = 0; i < 100; i++) {
-      const array = [];
-      const length = randomIntFromInterval(1, 1000);
-      for (let i = 0; i < length; i++) {
-        array.push(randomIntFromInterval(-1000, 1000));
-      }
-      const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
-      const mergeSortedArray = getMergeSortAnimations(array.slice());
-      console.log(arraysAreEqual(javaScriptSortedArray, mergeSortedArray));
-    }
-  }
+  // testSortingAlgorithms() {
+  //   for (let i = 0; i < 100; i++) {
+  //     const array = [];
+  //     const length = randomIntFromInterval(1, 1000);
+  //     for (let i = 0; i < length; i++) {
+  //       array.push(randomIntFromInterval(-1000, 1000));
+  //     }
+  //     const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
+  //     const mergeSortedArray = getMergeSortAnimations(array.slice());
+  //     console.log(arraysAreEqual(javaScriptSortedArray, mergeSortedArray));
+  //   }
+  // }
 
   render() {
     const { array } = this.state;
 
     return (
-      <div className="array-container">
-        {array.map((value, idx) => (
-          <div
-            className="array-bar"
-            key={idx}
-            style={{
-              backgroundColor: PRIMARY_COLOR,
-              height: `${value}px`,
-            }}></div>
-        ))}
-        <button onClick={() => this.resetArray()}>Generate New Array</button>
-        <button onClick={() => this.mergeSort()}>Merge Sort</button>
-        <button onClick={() => this.quickSort()}>Quick Sort</button>
-        <button onClick={() => this.heapSort()}>Heap Sort</button>
-        <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
-      </div>
+      <>
+        <div className="array-container">
+          {array.map((value, idx) => (
+            <div
+              className="array-bar"
+              key={idx}
+              style={{
+                backgroundColor: PRIMARY_COLOR,
+                height: `${value}px`,
+              }}></div>
+          ))}
+        </div>
+        <div className="button-container">
+          <button className="button" onClick={() => this.resetArray()}>Generate New Array</button>
+          <button className="button" onClick={() => this.mergeSort()}>Merge Sort</button>
+          <button className="button" onClick={() => this.quickSort()}>Quick Sort</button>
+          <button className="button" onClick={() => this.heapSort()}>Heap Sort</button>
+          <button className="button" onClick={() => this.bubbleSort()}>Bubble Sort</button>
+          <button className="button" onClick={() => window.location.reload()}>Stop</button>
+        </div>
+        <div className="size-change">
+        <form onSubmit={this.handleSubmit}>
+          <label>
+          Change the size of the array you want to sort..
+            <input type="text" id="size" name="size" value={this.state.size} />
+            
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        </div>
+
+
+      </>
     );
   }
 }
