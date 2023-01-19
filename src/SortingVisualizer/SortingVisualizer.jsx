@@ -19,6 +19,8 @@ const PIVOT_COLOR = 'blue';
 
 // This is the comparing nodes color in heap sort.
 const HEAP_COLOR = 'yellow';
+
+// This is the finished node color in heap sort.
 const FINISH_COLOR = 'purple';
 
 export default class SortingVisualizer extends React.Component {
