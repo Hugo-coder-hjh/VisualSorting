@@ -228,7 +228,9 @@ export default function SortingVisualizer() {
 
   }
 
-  
+  const calWidth = 1200/NUMBER_OF_ARRAY_BARS;
+
+
   return (
     <>
     <div className="button-container">
@@ -261,6 +263,7 @@ export default function SortingVisualizer() {
           style={{
             backgroundColor: PRIMARY_COLOR,
             height: `${value}px`,
+            width: `${calWidth}px`
           }}></div>
       ))}
     </div>
