@@ -1,5 +1,5 @@
 import React from 'react';
-import { getMergeSortAnimations, getQuickSortAnimations, getBubblesortAnimations } from '../sortingAlgorithms/sortingAlgorithms.js';
+import { getMergeSortAnimations, getQuickSortAnimations, getBubbleSortAnimations, getHeapSortAnimations } from '../sortingAlgorithms/sortingAlgorithms.js';
 import './SortingVisualizer.css';
 
 // Change this value for the speed of the animations.
@@ -17,6 +17,10 @@ const SECONDARY_COLOR = 'red';
 // This is the color of pivot in quick sort.
 const PIVOT_COLOR = 'blue';
 
+// This is the comparing nodes color in heap sort.
+const HEAP_COLOR = 'yellow';
+const FINISH_COLOR = 'purple';
+
 export default class SortingVisualizer extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +37,7 @@ export default class SortingVisualizer extends React.Component {
   resetArray() {
     const array = [];
     for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
-      array.push(randomIntFromInterval(5, 730));
+      array.push(randomIntFromInterval(5, 550));
     }
     this.setState({ array });
   }
@@ -99,26 +103,93 @@ export default class SortingVisualizer extends React.Component {
   }
 
   heapSort() {
-    // We leave it as an exercise to the viewer of this code to implement this method.
+    const animations = getHeapSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      if (animations[i].length === 3 && typeof animations[i][2] === "boolean") {
+        // it is trying to set current swappers
+        const [barOneIdx, barTwoIdx, condition] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        // trying to change color
+        let color = (condition === true) ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else if (animations[i].length === 4 && typeof animations[i][3] !== "boolean") {
+        // it is trying to do the swap and change the height of the bars
+        setTimeout(() => {
+          const [barOneIdx, heightOne, barTwoIdx, heightTwo] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          const barTwoStyle = arrayBars[barTwoIdx].style;
+          barOneStyle.height = `${heightOne}px`;
+          barTwoStyle.height = `${heightTwo}px`;
+        }, i * ANIMATION_SPEED_MS);
+      } else if (animations[i].length === 4 && typeof animations[i][2] !== "boolean") {
+        // it is trying to siftdown the node
+        const [barOneIdx, barTwoIdx, barThreeIdx, condition] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const barThreeStyle = arrayBars[barThreeIdx].style;
+        // trying to change color
+        let color = (condition === true) ? HEAP_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+          barThreeStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else if (animations[i].length === 2 && typeof animations[i][1] === "boolean") {
+        // it is trying to change back the unswapped bar
+        const [barOneIdx, condition] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        // trying to change color
+        let color = (condition === true) ? HEAP_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else if (animations[i].length === 1) {
+        const [barOneIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const color = FINISH_COLOR;
+        // trying to change color
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else if (animations[i].length === 4) {
+        const [barOneIdx, barTwoIdx, condition] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        let color = (condition === true) ? HEAP_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
+    const arrayBars = document.getElementsByClassName('array-bar');
+    setTimeout(() => {
+      for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
+        const barOneStyle = arrayBars[i].style;
+        barOneStyle.backgroundColor = PRIMARY_COLOR;
+      }
+    }, (animations.length + 10) * ANIMATION_SPEED_MS);
   }
 
   bubbleSort() {
-    const animations = getBubblesortAnimations(this.state.array);
+    const animations = getBubbleSortAnimations(this.state.array);
     // console.log(animations);
     for (let i = 0; i < animations.length; i++) {
       const barrayBars = document.getElementsByClassName('array-bar');
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
-        const [bbarOneIdx, bbarTwoIdx] = animations[i];
-        // console.log(bbarOneIdx);
-        // console.log(bbarTwoIdx);
-        //console.log('s', barrayBars[bbarTwoIdx]);
-        const bbarOneStyle = barrayBars[bbarOneIdx].style;
-        const bbarTwoStyle = barrayBars[bbarTwoIdx].style;
+        const [barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = barrayBars[barOneIdx].style;
+        const barTwoStyle = barrayBars[barTwoIdx].style;
         const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
         setTimeout(() => {
-          bbarOneStyle.backgroundColor = color;
-          bbarTwoStyle.backgroundColor = color;
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
         }, i * ANIMATION_SPEED_MS);
       } else {
         if (animations[i].length > 0) {
