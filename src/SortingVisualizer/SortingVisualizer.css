@@ -1,12 +1,15 @@
 .array-container {
   position: absolute;
   left: 100px;
+  margin-top: 200px;
   /* top: 100px; */
 }
 
 .array-bar {
   display: inline-block;
   margin: 0 1px;
+  position: relative;
+  bottom: 0px;
 }
 
 .button-container .button{
