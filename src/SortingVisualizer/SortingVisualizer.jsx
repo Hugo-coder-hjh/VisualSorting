@@ -17,8 +17,10 @@ const SECONDARY_COLOR = 'red';
 // This is the color of pivot in quick sort.
 const PIVOT_COLOR = 'blue';
 
-// This is the comparing nodes color in heap sort.
+// This is the comparing bar color in heap sort.
 const HEAP_COLOR = 'yellow';
+
+// This is the finished bar color.
 const FINISH_COLOR = 'purple';
 
 export default function SortingVisualizer() {
@@ -62,13 +64,12 @@ export default function SortingVisualizer() {
     console.log("after",array);
   }
 
+  const calWidth = 1200 / NUMBER_OF_ARRAY_BARS;
+
   useEffect(() => {
     resetArray();
   },[NUMBER_OF_ARRAY_BARS])
 
-  // setTimeout(() => {
-  //   console.log("final",array);
-  // }, 20);
 
   const mergeSort = () => {
     const animations = getMergeSortAnimations(array);
@@ -238,8 +239,6 @@ export default function SortingVisualizer() {
 
   }
 
-  const calWidth = 1200/NUMBER_OF_ARRAY_BARS;
-
 
   return (
     <div>
@@ -277,7 +276,6 @@ export default function SortingVisualizer() {
       <h3>UpdatedPlaySpeed: {ANIMATION_SPEED_MS}</h3>
       <button onClick={handleSpeed}>Update Speed</button>
     </div>
-
     <div className="array-container">
       {array.map((value, idx) => (
         <div
@@ -292,6 +290,7 @@ export default function SortingVisualizer() {
     </div>
     
   </div>  
+
   );
 }
 
