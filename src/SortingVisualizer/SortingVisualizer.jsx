@@ -36,7 +36,7 @@ export default function SortingVisualizer() {
   };
 
   const [bufferSpeed, setBufferSpeed] = useState('');
-  const [ANIMATION_SPEED_MS, setANIMATION_SPEED_MS] = useState('200');
+  const [ANIMATION_SPEED_MS, setANIMATION_SPEED_MS] = useState('50');
   const handleBuffer = (event) => {
     setBufferSpeed(event.target.value);
   };
