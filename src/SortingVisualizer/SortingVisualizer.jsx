@@ -1,5 +1,5 @@
 import React from 'react';
-import { getMergeSortAnimations, getQuickSortAnimations } from '../sortingAlgorithms/sortingAlgorithms.js';
+import { getMergeSortAnimations, getQuickSortAnimations, getBubblesortAnimations } from '../sortingAlgorithms/sortingAlgorithms.js';
 import './SortingVisualizer.css';
 
 // Change this value for the speed of the animations.
@@ -103,7 +103,37 @@ export default class SortingVisualizer extends React.Component {
   }
 
   bubbleSort() {
-    // We leave it as an exercise to the viewer of this code to implement this method.
+    const animations = getBubblesortAnimations(this.state.array);
+    // console.log(animations);
+    for (let i = 0; i < animations.length; i++) {
+      const barrayBars = document.getElementsByClassName('array-bar');
+      const isColorChange = i % 3 !== 2;
+      if (isColorChange) {
+        const [bbarOneIdx, bbarTwoIdx] = animations[i];
+        // console.log(bbarOneIdx);
+        // console.log(bbarTwoIdx);
+        //console.log('s', barrayBars[bbarTwoIdx]);
+        const bbarOneStyle = barrayBars[bbarOneIdx].style;
+        const bbarTwoStyle = barrayBars[bbarTwoIdx].style;
+        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          bbarOneStyle.backgroundColor = color;
+          bbarTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else {
+        if (animations[i].length > 0) {
+          setTimeout(() => {
+            const [barOneIdx, newHeightOne, barTwoIdx, newHeightTwo] = animations[i];
+            const barOneStyle = barrayBars[barOneIdx].style;
+            const barTwoStyle = barrayBars[barTwoIdx].style;
+            barOneStyle.height = `${newHeightOne}px`;
+            barTwoStyle.height = `${newHeightTwo}px`;
+          }, i * ANIMATION_SPEED_MS);
+        }
+
+      }
+    }
+
   }
 
   // NOTE: This method will only work if your sorting algorithms actually return

@@ -135,3 +135,42 @@ function doMerge(
   }
 }
 
+export function getBubblesortAnimations(array) {
+  const animations = [];
+  if (array.length <= 1) return array;
+  const auxiliaryArray = array.slice();
+  bubbleSortHelper(array, array.length - 1, auxiliaryArray, animations);
+  return animations;
+}
+
+function bubbleSortHelper(
+  mainArray,
+  endIdx,
+  auxiliaryArray,
+  animations,
+) {
+  let i, j;
+  for (i = 0; i <= endIdx; i++) {
+    for (j = 0; j < endIdx - i; j++) {
+      //console.log("j+1", j + 1);
+      animations.push([j, (j + 1)]);
+      animations.push([j, (j + 1)]);
+      if (auxiliaryArray[j] > auxiliaryArray[j + 1]) {
+
+        swap(auxiliaryArray, j, j + 1);
+        animations.push([j + 1, auxiliaryArray[j + 1], j, auxiliaryArray[j]]);
+
+      } else {
+        animations.push([]);
+      }
+    }
+  }
+
+}
+
+function swap(arr, xp, yp) {
+  var temp = arr[xp];
+  arr[xp] = arr[yp];
+  arr[yp] = temp;
+
+}
