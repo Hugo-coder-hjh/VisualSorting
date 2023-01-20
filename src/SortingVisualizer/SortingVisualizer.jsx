@@ -281,16 +281,21 @@ export default function SortingVisualizer() {
           style={{
             margin: 50
           }}>
-        <h2>Change the size of the array you want to sort (0,100)</h2>
-        <input
+        <h1>Change the size of the array you want to sort (0,100)</h1>
+        <input className="inputboxArraySize" 
           type="text"
           id="message"
           name="message"
           onChange={handleChange}
           value={message}
+          // style="width: 300px"
+          style={{
+            width: 100,
+            height: 50
+          }}
         />
-        <h3>UpdatedArraySize: {NUMBER_OF_ARRAY_BARS}</h3>
-        <button onClick={handleClick}>Update Array Size</button>
+        <h2>UpdatedArraySize: {NUMBER_OF_ARRAY_BARS}</h2>
+        <button className="updateArrayButton" onClick={handleClick}>Update Array Size</button>
       </div>
 
       <div className="speed-change" 
@@ -298,16 +303,21 @@ export default function SortingVisualizer() {
         margin: 50
       }}
       >
-        <h2>Change the time out of your algorithm:</h2>
-        <input
+        <h1>Change the time out of your algorithm:</h1>
+        <input className="inputboxArraySize" 
           type="text"
           id="speed"
           name="speed"
           onChange={handleBuffer}
           value={bufferSpeed}
+          // style="width: 300px"
+          style={{
+            width: 100,
+            height: 50
+          }}
         />
-        <h3>UpdatedPlaySpeed: {ANIMATION_SPEED_MS}</h3>
-        <button onClick={handleSpeed}>Update Speed</button>
+        <h2>UpdatedPlaySpeed: {ANIMATION_SPEED_MS}</h2>
+        <button className="updateSpeedButton" onClick={handleSpeed}>Update Speed</button>
       </div>
     </div>
 

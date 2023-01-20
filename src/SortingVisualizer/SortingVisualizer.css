@@ -18,20 +18,20 @@
 .button-container .button{
   /* display: inline-block; */
   margin-top: 20px;
-  padding: 10px 15px;
-  font-size: 24px;
+  padding: 20px 25px;
+  font-size: 50px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #4CAF50;
+  background-color: #af4c99;
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
 }
 
-.button-container .button:hover {background-color: #3e8e41}
+.button-container .button:hover {background-color: #f4d1f8}
 
 .button-container .button:active {
   background-color: #3e8e41;
@@ -50,3 +50,43 @@
   flex-direction: row;
   justify-content: center;
 }
+
+.updateArrayButton {
+  /* display: inline-block; */
+  margin-top: 20px;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #af4c99;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  border-color: rgb(5, 5, 5);
+  
+}
+
+.updateArrayButton:hover {background-color: #f4d1f8}
+
+.updateSpeedButton {
+  /* display: inline-block; */
+  margin-top: 20px;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #af4c99;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  border-color: rgb(5, 5, 5);
+  
+}
+.updateSpeedButton:hover {background-color: #f4d1f8}
+
