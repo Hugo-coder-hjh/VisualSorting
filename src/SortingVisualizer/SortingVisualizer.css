@@ -1,8 +1,11 @@
 .array-container {
   position: absolute;
   left: 100px;
-  margin-top: 200px;
+  margin-top: 100px;
   /* top: 100px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .array-bar {
@@ -14,6 +17,7 @@
 
 .button-container .button{
   /* display: inline-block; */
+  margin-top: 20px;
   padding: 10px 15px;
   font-size: 24px;
   cursor: pointer;
@@ -33,4 +37,16 @@
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+
+.updateTool {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.pictures {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
