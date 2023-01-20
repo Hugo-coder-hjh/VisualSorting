@@ -31,7 +31,7 @@ You will also see any lint errors in the console.
   
 Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.
   
-**Time Complexity: O(N2)**
+**Time Complexity: O(n^2)**
 
 **Auxiliary Space: O(1)**
 
@@ -57,7 +57,7 @@ QuickSort is a Divide and Conquer algorithm. It picks an element as a pivot and 
 
 Heap sort is a comparison-based sorting technique based on Binary Heap data structure. It is similar to the selection sort where we first find the minimum element and place the minimum element at the beginning. Repeat the same process for the remaining elements.
   
-**Time Complexity: O(N2)**
+**Time Complexity: O(nlogn)**
 
 **Auxiliary Space: O(1)**
   
@@ -73,9 +73,9 @@ Merge sort is a sorting algorithm that works by dividing an array into smaller s
 
 In simple terms, we can say that the process of merge sort is to divide the array into two halves, sort each half, and then merge the sorted halves back together. This process is repeated until the entire array is sorted.
   
-**Time Complexity: O(Nlog(N))**
+**Time Complexity: O(nlogn))**
   
-**Auxiliary Space: O(N)**
+**Auxiliary Space: O(n)**
 
 
 </div>
