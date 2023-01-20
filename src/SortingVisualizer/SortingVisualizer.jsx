@@ -72,7 +72,7 @@ export default function SortingVisualizer() {
     console.log("after",array);
   }
 
-  const calWidth = 1200 / NUMBER_OF_ARRAY_BARS;
+  const calWidth = 1500 / NUMBER_OF_ARRAY_BARS;
 
   useEffect(() => {
     resetArray();
@@ -266,7 +266,8 @@ export default function SortingVisualizer() {
   }
 
   return (
-    <div>
+    <div className="outside">
+
     <div className="button-container">
       <button className="button" onClick={() => resetArray()}>Generate New Array</button>
       <button className="button" onClick={() => mergeSort()}>Merge Sort</button>
@@ -291,7 +292,8 @@ export default function SortingVisualizer() {
           // style="width: 300px"
           style={{
             width: 100,
-            height: 50
+            height: 50,
+            fontSize: 30,
           }}
         />
         <h2>UpdatedArraySize: {NUMBER_OF_ARRAY_BARS}</h2>
@@ -313,15 +315,17 @@ export default function SortingVisualizer() {
           // style="width: 300px"
           style={{
             width: 100,
-            height: 50
+            height: 50,
+            fontSize: 30,
           }}
         />
         <h2>UpdatedPlaySpeed: {ANIMATION_SPEED_MS}</h2>
         <button className="updateSpeedButton" onClick={handleSpeed}>Update Speed</button>
       </div>
     </div>
-
+    
     <div className="array-container">
+      <div className="leftBar">
       {array.map((value, idx) => (
         <div
           className="array-bar"
@@ -332,15 +336,11 @@ export default function SortingVisualizer() {
             width: `${calWidth}px`
           }}></div>
       ))}
+      </div>
       <div className="img-container">
         {image} 
-      </div>
+      </div>  
     </div>
-
-    {/* <div className="image-container">
-      {image} 
-    </div> */}
-  
   </div>  
 
   );
